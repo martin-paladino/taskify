@@ -19,7 +19,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 
 
-const TaskList = ({ tasks, loading, error }) => {
+const TaskList = ({ tasks, actions, loading, error }) => {
     if (loading) {
         return <p>Loading tasks...</p>;
     }
@@ -41,7 +41,11 @@ const TaskList = ({ tasks, loading, error }) => {
                 </TableHead>
                 <TableBody>
                     {tasks.map((task) => (
-                        <TaskItem key={task.id} task={task} StyledTableCell={StyledTableCell}></TaskItem>
+                        <TaskItem
+                            key={task.id}
+                            task={task}
+                            actions={actions}
+                            StyledTableCell={StyledTableCell} />
                     ))}
                 </TableBody>
             </Table>

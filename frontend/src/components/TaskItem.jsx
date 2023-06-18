@@ -1,5 +1,6 @@
-import TableRow from '@mui/material/TableRow';
-import { styled } from '@mui/material/styles';
+import { Button, TableRow, styled } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -11,18 +12,29 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
   }));
 
-const TaskItem = ({ task, StyledTableCell }) => {
-
-    return (
-        <StyledTableRow>
-            <StyledTableCell component="th" scope="row">
-                <img src={task.image} alt={task.title} />
-            </StyledTableCell>
-            <StyledTableCell>{task.title}</StyledTableCell>
-            <StyledTableCell align="right">{task.endDate}</StyledTableCell>
-            <StyledTableCell align="right">{task.completed ? 'Yes' : 'No'}</StyledTableCell>
-        </StyledTableRow>
-    );
+const TaskItem = ({ task, actions, StyledTableCell }) => {
+  
+  const formattedDate = task.end_date ? new Date(task.end_date).toLocaleDateString('en-CA') : "-";
+  const handleChangeCompleted = (e) => {
+    e.preventDefault();
+    actions.handleUpdateTaskCompleted({completed: true}, task.id);
+  };
+  return (
+    <StyledTableRow>
+      <StyledTableCell component="th" scope="row">
+        <img src={task.image || "images/default-image.png"} alt={task.title} style={{ width: '50px', height: 'auto' }} />
+      </StyledTableCell>
+      <StyledTableCell>{task.title}</StyledTableCell>
+      <StyledTableCell align="right">{formattedDate}</StyledTableCell>
+      <StyledTableCell align="right">{task.completed ? 'Yes' : 'No'}</StyledTableCell>
+      <Button>
+        <DeleteIcon fontSize='medium' onClick={() => actions.handleDeleteTask(task.id)}></DeleteIcon>
+      </Button>
+      <Button>
+        <AddTaskIcon fontSize='medium' onClick={handleChangeCompleted}></AddTaskIcon>
+      </Button>
+    </StyledTableRow>
+  );
 };
 
 export default TaskItem;

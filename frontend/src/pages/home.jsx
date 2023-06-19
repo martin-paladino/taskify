@@ -8,15 +8,31 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Home = () => {
     const [tasks, setTasks] = useState([]);
+    const [filteredTasks, setFilteredTasks] = useState([]);
+    const [selectedFilter, setSelectedFilter] = useState("all");
     const [openedModal, setOpenedModal] = useState(false);
 
     useEffect(() =>{
         const getTasks = async () => {
             const tasks = await fetchTasks();
             setTasks(tasks);
+            setFilteredTasks(tasks);
         };
         getTasks();
     }, []);
+
+    useEffect(() => {
+        console.log("hola")
+        if(selectedFilter === "all") {
+            setFilteredTasks(tasks);
+        }
+        else if(selectedFilter === "completed") {
+            setFilteredTasks(tasks.filter((task) => task.completed === true));
+        }
+        else if(selectedFilter === "pending") {
+            setFilteredTasks(tasks.filter((task) => task.completed === false));
+        }
+    }, [tasks, selectedFilter]);
 
     const handleDeleteTask = async (id) => {
         await deleteTask(id);
@@ -41,9 +57,8 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar></Navbar>
-            <h1>Taskify</h1>
-            <TaskList tasks={tasks} actions={ {handleDeleteTask, handleUpdateTaskCompleted} }></TaskList>
+            <Navbar setSelectedFilter={setSelectedFilter}></Navbar>
+            <TaskList tasks={filteredTasks} actions={ {handleDeleteTask, handleUpdateTaskCompleted} }></TaskList>
             <Button style={{ boxShadow: "none" }} variant="contained" onClick={handleOpenModal}>
                 <AddCircleOutlineIcon />
             </Button>

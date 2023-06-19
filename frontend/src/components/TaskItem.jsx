@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { TableRow, styled, Tooltip, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -13,12 +14,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const TaskItem = ({ task, actions, StyledTableCell }) => {
+    const { t } = useTranslation();
 
     const formattedDate = task.end_date ? new Date(task.end_date).toLocaleDateString('en-CA') : "-";
     const handleChangeCompleted = (e) => {
         e.preventDefault();
         actions.handleUpdateTaskCompleted({ completed: true }, task.id);
     };
+    
     return (
         <StyledTableRow>
             <StyledTableCell component="th" scope="row">
@@ -26,13 +29,13 @@ const TaskItem = ({ task, actions, StyledTableCell }) => {
             </StyledTableCell>
             <StyledTableCell>{task.title}</StyledTableCell>
             <StyledTableCell align="right">{formattedDate}</StyledTableCell>
-            <StyledTableCell align="right">{task.completed ? 'Completed' : 'Pending'}</StyledTableCell>
-            <Tooltip title="Delete task">
+            <StyledTableCell align="right">{t(task.completed ? "taskState.completed" : "taskState.pending")}</StyledTableCell>
+            <Tooltip title={t("tooltips.delete")}>
                 <IconButton>
                     <DeleteIcon fontSize='medium' onClick={() => actions.handleDeleteTask(task.id)}></DeleteIcon>
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Mark as completed">
+            <Tooltip title={t("tooltips.complete")}>
                 <IconButton>
                     <CheckCircleOutlineIcon fontSize='medium' onClick={handleChangeCompleted}></CheckCircleOutlineIcon>
                 </IconButton>

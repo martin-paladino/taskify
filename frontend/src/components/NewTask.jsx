@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Box, Button, FormControl, TextField, Input, InputLabel } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { Box, Button, FormControl, TextField, Input, InputLabel, Typography } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -19,6 +20,8 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
         endDate: "",
         image: "",
     });
+
+    const { t } = useTranslation();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,11 +45,14 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
 
     return (
         <Box sx={style}>
+            <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+                {t("form.newTask")}
+            </Typography>
             <form onSubmit={handleSubmit}>
                 <FormControl fullWidth>
                     <TextField
                         name="title"
-                        label="Title"
+                        label={t("form.title")}
                         type="text"
                         value={formData.title}
                         onChange={handleChange}
@@ -57,7 +63,7 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
                 <FormControl fullWidth>
                     <TextField
                         name="endDate"
-                        label="End Date"
+                        label={t("form.endDate")}
                         type="date"
                         value={formData.endDate}
                         onChange={handleChange}
@@ -66,7 +72,7 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
                     />
                 </FormControl>
                 <FormControl fullWidth sx={{ mb: 2 }}>
-                    <InputLabel htmlFor="file-input">Image</InputLabel>
+                    <InputLabel htmlFor="file-input">{t("form.image")}</InputLabel>
                     <Input
                         id="file-input"
                         name="image"
@@ -75,10 +81,10 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
                     />
                 </FormControl>
                 <Button type="submit" variant="contained">
-                    Submit
+                    {t("form.submit")}
                 </Button>
                 <Button onClick={onCloseModal}>
-                    Cancel
+                    {t("form.cancel")}
                 </Button>
             </form>
         </Box>

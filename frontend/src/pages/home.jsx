@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import TaskList from "../components/TaskList";
 import Navbar from "../components/Navbar";
 import NewTask from "../components/NewTask";
@@ -11,6 +12,8 @@ const Home = () => {
     const [filteredTasks, setFilteredTasks] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("all");
     const [openedModal, setOpenedModal] = useState(false);
+
+    const { t } = useTranslation();
 
     useEffect(() =>{
         const getTasks = async () => {
@@ -59,7 +62,7 @@ const Home = () => {
         <div>
             <Navbar setSelectedFilter={setSelectedFilter}></Navbar>
             <TaskList tasks={filteredTasks} actions={{ handleDeleteTask, handleUpdateTaskCompleted }}></TaskList>
-            <Tooltip title="Add new task">
+            <Tooltip title={t("tooltips.add")}>
                 <IconButton style={{ boxShadow: "none" }} variant="contained" onClick={handleOpenModal}>
                     <AddCircleOutlineIcon />
                 </IconButton>

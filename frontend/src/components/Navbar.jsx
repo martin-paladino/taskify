@@ -1,8 +1,11 @@
-import { Button, Box, AppBar, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { Button, Box, AppBar, Toolbar, Typography } from "@mui/material";
 
 const Navbar = ({ setSelectedFilter }) => {
     const [selected, setSelected] = useState("all");
+
+    const { t } = useTranslation();
 
     const handleButtonClick = (value) => {
         setSelected(value);
@@ -33,21 +36,21 @@ const Navbar = ({ setSelectedFilter }) => {
                         variant={selected === "all" ? "contained" : "text"}
                         onClick={() => handleButtonClick("all")}
                     >
-                        All
+                        {t("filters.all")}
                     </Button>
                     <Button
                         color="inherit"
                         variant={selected === "completed" ? "contained" : "text"}
                         onClick={() => handleButtonClick("completed")}
                     >
-                        Completed
+                        {t("filters.completed")}
                     </Button>
                     <Button
                         color="inherit"
                         variant={selected === "pending" ? "contained" : "text"}
                         onClick={() => handleButtonClick("pending")}
                     >
-                        Pending
+                        {t("filters.pending")}
                     </Button>
                 </Box>
             </Toolbar>

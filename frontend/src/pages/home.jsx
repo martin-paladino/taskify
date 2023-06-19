@@ -3,7 +3,7 @@ import TaskList from "../components/TaskList";
 import Navbar from "../components/Navbar";
 import NewTask from "../components/NewTask";
 import { fetchTasks, deleteTask, createTask, updateTask } from "../services/api";
-import { Button, Modal } from '@mui/material';
+import { Modal, IconButton, Tooltip } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Home = () => {
@@ -58,10 +58,12 @@ const Home = () => {
     return (
         <div>
             <Navbar setSelectedFilter={setSelectedFilter}></Navbar>
-            <TaskList tasks={filteredTasks} actions={ {handleDeleteTask, handleUpdateTaskCompleted} }></TaskList>
-            <Button style={{ boxShadow: "none" }} variant="contained" onClick={handleOpenModal}>
-                <AddCircleOutlineIcon />
-            </Button>
+            <TaskList tasks={filteredTasks} actions={{ handleDeleteTask, handleUpdateTaskCompleted }}></TaskList>
+            <Tooltip title="Add new task">
+                <IconButton style={{ boxShadow: "none" }} variant="contained" onClick={handleOpenModal}>
+                    <AddCircleOutlineIcon />
+                </IconButton>
+            </Tooltip>
             <Modal
                 open={openedModal}
                 onClose={handleCloseModal}

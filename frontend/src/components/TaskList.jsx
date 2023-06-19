@@ -19,14 +19,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 
 
-const TaskList = ({ tasks, actions, loading, error }) => {
-    if (loading) {
-        return <p>Loading tasks...</p>;
-    }
-    
-    if (error) {
-        return <p>Error loading tasks</p>;
-    }
+const TaskList = ({ tasks, actions }) => {
     
     return (
         <TableContainer component={Paper}>
@@ -36,7 +29,8 @@ const TaskList = ({ tasks, actions, loading, error }) => {
                         <StyledTableCell>Image</StyledTableCell>
                         <StyledTableCell>Task</StyledTableCell>
                         <StyledTableCell align="right">End Date</StyledTableCell>
-                        <StyledTableCell align="right">Completed</StyledTableCell>
+                        <StyledTableCell align="right">Status</StyledTableCell>
+                        <StyledTableCell align="right"></StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

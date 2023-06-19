@@ -1,0 +1,28 @@
+{
+    "image": "Image",
+    "task": "Task",
+    "endDate": "End Date",
+    "state": "State",
+    "filters": {
+        "all": "All",
+        "completed": "Completed",
+        "pending": "Pending"
+    },
+    "taskState": {
+        "completed": "Completed",
+        "pending": "Pending"
+    },
+    "tooltips": {
+        "delete": "Delete task",
+        "complete": "Mark as completed",
+        "add": "Add new task"
+    },
+    "form": {
+        "newTask": "Add new task",
+        "title": "Title",
+        "endDate": "End Date",
+        "image": "Image",
+        "submit": "Submit",
+        "cancel": "Cancel"
+    }
+}

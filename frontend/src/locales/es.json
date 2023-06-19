@@ -1,0 +1,28 @@
+{
+    "image": "Imagen",
+    "task": "Tarea",
+    "endDate": "Finalización",
+    "state": "Estado",
+    "filters": {
+        "all": "Todas",
+        "completed": "Completadas",
+        "pending": "Pendientes"
+    },
+    "taskState": {
+        "completed": "Completada",
+        "pending": "Pendiente"
+    },
+    "tooltips": {
+        "delete": "Eliminar tarea",
+        "complete": "Marcar como completada",
+        "add": "Añadir nueva tarea"
+    },
+    "form": {
+        "newTask": "Añadir nueva tarea",
+        "title": "Título",
+        "endDate": "Fecha de finalización",
+        "image": "Imagen",
+        "submit": "Enviar",
+        "cancel": "Cancelar"
+    }
+}

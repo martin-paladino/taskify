@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 
 from .models import Task
 from django.contrib.auth.models import User
-from .serializers import TaskSerializer
+from .serializers import TaskSerializer, UserSerializer
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -46,7 +46,11 @@ class UserRegistrationView(APIView):
             username=username, password=password, email=email
         )
 
-        return Response({"message": "User registered successfully"})
+        serializer = UserSerializer(user)
+        return Response({
+            "message": "User registered successfully",
+            "user": serializer.data,    
+        })
 
 
 class UserLoginView(APIView):
@@ -58,7 +62,11 @@ class UserLoginView(APIView):
 
         if user is not None:
             login(request, user)
-            return Response({"message": "User logged in successfully"})
+            serializer = UserSerializer(user)
+            return Response({
+                "message": "User logged in successfully",
+                "user": serializer.data,
+                })
         else:
             return Response(
                 {"message": "Invalid username or password"},

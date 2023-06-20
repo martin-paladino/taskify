@@ -1,18 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, FormControl, TextField, Input, InputLabel, Typography } from '@mui/material';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+import { Box, Button, FormControl, TextField, Input, Typography } from '@mui/material';
 
 const NewTask = ({onCreateTask, onCloseModal }) => {
     const [formData, setFormData] = useState({
@@ -44,12 +32,12 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
       };
 
     return (
-        <Box sx={style}>
+        <Box className="form-box">
             <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
                 {t("form.newTask")}
             </Typography>
             <form onSubmit={handleSubmit}>
-                <FormControl fullWidth>
+                <FormControl margin='normal' fullWidth>
                     <TextField
                         name="title"
                         label={t("form.title")}
@@ -60,7 +48,7 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
                         required
                     />
                 </FormControl>
-                <FormControl fullWidth>
+                <FormControl margin='normal' fullWidth>
                     <TextField
                         name="endDate"
                         label={t("form.endDate")}
@@ -71,8 +59,7 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
                         InputLabelProps={{ shrink: true }}
                     />
                 </FormControl>
-                <FormControl fullWidth sx={{ mb: 2 }}>
-                    <InputLabel htmlFor="file-input">{t("form.image")}</InputLabel>
+                <FormControl margin='normal' fullWidth sx={{ mb: 2 }}>
                     <Input
                         id="file-input"
                         name="image"

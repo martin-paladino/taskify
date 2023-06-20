@@ -64,7 +64,7 @@ const Home = () => {
             <TaskList tasks={filteredTasks} actions={{ handleDeleteTask, handleUpdateTaskCompleted }}></TaskList>
             <Tooltip title={t("tooltips.add")}>
                 <IconButton style={{ boxShadow: "none" }} variant="contained" onClick={handleOpenModal}>
-                    <AddCircleOutlineIcon />
+                    <AddCircleOutlineIcon fontSize="large" />
                 </IconButton>
             </Tooltip>
             <Modal

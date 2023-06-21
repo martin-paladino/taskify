@@ -9,6 +9,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Home = () => {
     const [tasks, setTasks] = useState([]);
+    const [user, setUser] = useState(null);
     const [filteredTasks, setFilteredTasks] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("all");
     const [openedModal, setOpenedModal] = useState(false);
@@ -21,6 +22,8 @@ const Home = () => {
             setTasks(tasks);
             setFilteredTasks(tasks);
         };
+        const user = localStorage.getItem("user");
+        if(user) setUser(JSON.parse(user));
         getTasks();
     }, []);
 

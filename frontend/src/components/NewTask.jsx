@@ -24,7 +24,6 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
     };
 
     const handleChange = (e) => {
-        if(e.target.files) console.log("file", e.target.files[0])
         setFormData({
           ...formData,
           [e.target.name]: e.target.files ? e.target.files[0] : e.target.value,

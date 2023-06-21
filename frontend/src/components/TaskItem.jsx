@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { getUser } from '../utils';
 import { TableRow, styled, Tooltip, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -15,11 +16,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const TaskItem = ({ task, actions, StyledTableCell }) => {
     const { t } = useTranslation();
+    const user = getUser();
 
     const formattedDate = task.end_date ? new Date(task.end_date).toLocaleDateString('en-CA') : "-";
     const handleChangeCompleted = (e) => {
         e.preventDefault();
-        actions.handleUpdateTaskCompleted({ completed: true }, task.id);
+        actions.handleUpdateTaskCompleted({ completed: true }, task.id, user.id);
     };
 
     return (
@@ -32,7 +34,7 @@ const TaskItem = ({ task, actions, StyledTableCell }) => {
             <StyledTableCell align="right">{t(task.completed ? "taskState.completed" : "taskState.pending")}</StyledTableCell>
             <StyledTableCell align="right">
             <Tooltip title={t("tooltips.delete")}>
-                <IconButton onClick={() => actions.handleDeleteTask(task.id)}>
+                <IconButton onClick={() => actions.handleDeleteTask(task.id, user.id)}>
                     <DeleteIcon fontSize='medium' />
                 </IconButton>
             </Tooltip>

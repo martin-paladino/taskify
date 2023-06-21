@@ -1,5 +1,6 @@
 import { useState, forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getUser } from '../utils';
 import { Box, Button, FormControl, TextField, Input, Typography } from '@mui/material';
 
 const NewTask = forwardRef(({onCreateTask, onCloseModal }, ref) => {
@@ -7,6 +8,7 @@ const NewTask = forwardRef(({onCreateTask, onCloseModal }, ref) => {
         title: "",
         endDate: "",
         image: "",
+        related_user: getUser().id,
     });
 
     const { t } = useTranslation();
@@ -18,6 +20,7 @@ const NewTask = forwardRef(({onCreateTask, onCloseModal }, ref) => {
         form.append("title", formData.title);
         form.append("end_date", formData.endDate);
         form.append("image", formData.image);
+        form.append("related_user", formData.related_user);
 
         onCreateTask(form);
         onCloseModal();

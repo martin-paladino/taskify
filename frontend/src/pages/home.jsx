@@ -22,10 +22,11 @@ const Home = () => {
         const currentUser = getUser();
         if(!currentUser) {
             navigate("/login");
+            return;
         }
 
         const getTasks = async () => {
-            const tasks = await fetchTasks();
+            const tasks = await fetchTasks(currentUser.id);
             setTasks(tasks);
             setFilteredTasks(tasks);
         };
@@ -44,8 +45,8 @@ const Home = () => {
         }
     }, [tasks, selectedFilter]);
 
-    const handleDeleteTask = async (id) => {
-        await deleteTask(id);
+    const handleDeleteTask = async (id, userId) => {
+        await deleteTask(id, userId);
         // filter out the task that was deleted avoids having to make another API call
         // to get the updated list of tasks
         setTasks(tasks.filter((task) => task.id !== id));
@@ -56,8 +57,8 @@ const Home = () => {
         setTasks([...tasks, newTask]);
     };
 
-    const handleUpdateTaskCompleted = async (fields, taskId) => {
-        const task = await updateTask(fields, taskId);
+    const handleUpdateTaskCompleted = async (fields, taskId, userId) => {
+        const task = await updateTask(fields, taskId, userId);
         setTasks(tasks.map((t) => (t.id === taskId ? task : t)));
     };
 

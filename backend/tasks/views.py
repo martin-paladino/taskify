@@ -17,7 +17,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         # Get the logged-in user
-        user = self.request.user
+        user = self.request.query_params.get("user", None)
         queryset = Task.objects.filter(related_user=user).order_by("-id")
 
         return queryset

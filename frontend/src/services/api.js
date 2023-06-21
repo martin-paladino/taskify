@@ -1,12 +1,16 @@
-import { getCsrfTokenCookie } from "../utils";
+import { getCsrfTokenCookie } from "../utils";  
 
 const BASE_URL = 'http://localhost:8000';
 
 /* --------- Tasks --------- */
 
-export const fetchTasks = async () => {
+export const fetchTasks = async (userId) => {
     try {
-        const res = await fetch(`${BASE_URL}/api/tasks/`);
+        const res = await fetch(`${BASE_URL}/api/tasks/?user=${userId}`, {
+            headers: {
+                'X-CSRFToken': getCsrfTokenCookie(),
+            },
+        });
         const data = await res.json();
         return data;
     } catch (error) {
@@ -27,9 +31,9 @@ export const createTask = async (task) => {
     }
 };
 
-export const updateTask = async (fields, taskId) => {
+export const updateTask = async (fields, taskId, userId) => {
     try {
-        const res = await fetch(`${BASE_URL}/api/tasks/${taskId}/`, {
+        const res = await fetch(`${BASE_URL}/api/tasks/${taskId}/?user=${userId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,9 +47,9 @@ export const updateTask = async (fields, taskId) => {
     }
 };
 
-export const deleteTask = async (id) => {
+export const deleteTask = async (id, userId) => {
     try {
-        const res = await fetch(`${BASE_URL}/api/tasks/${id}/`, {
+        const res = await fetch(`${BASE_URL}/api/tasks/${id}/?user=${userId}`, {
             method: 'DELETE',
         });
         return res.status === 204;

@@ -13,8 +13,14 @@ from django.core.validators import validate_email
 
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all().order_by("id")
     serializer_class = TaskSerializer
+    
+    def get_queryset(self):
+        # Get the logged-in user
+        user = self.request.user
+        queryset = Task.objects.filter(related_user=user).order_by("-id")
+
+        return queryset
 
 
 class UserRegistrationView(APIView):

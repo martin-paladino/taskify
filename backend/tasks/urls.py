@@ -15,6 +15,6 @@ urlpatterns = [
     path('logout/', UserLogoutView.as_view(), name='logout'),
 ]
 
-router.register(r"tasks", TaskViewSet)
+router.register(r"tasks", TaskViewSet, basename="task")
 
 urlpatterns += router.urls

@@ -21,7 +21,6 @@ export const createTask = async (task) => {
             body: task,
         });
         const data = await res.json();
-        console.log("data", data)
         return data;
     } catch (error) {
         throw error;

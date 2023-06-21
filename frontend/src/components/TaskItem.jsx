@@ -21,7 +21,7 @@ const TaskItem = ({ task, actions, StyledTableCell }) => {
         e.preventDefault();
         actions.handleUpdateTaskCompleted({ completed: true }, task.id);
     };
-    
+
     return (
         <StyledTableRow>
             <StyledTableCell component="th" scope="row">
@@ -30,16 +30,18 @@ const TaskItem = ({ task, actions, StyledTableCell }) => {
             <StyledTableCell>{task.title}</StyledTableCell>
             <StyledTableCell align="right">{formattedDate}</StyledTableCell>
             <StyledTableCell align="right">{t(task.completed ? "taskState.completed" : "taskState.pending")}</StyledTableCell>
+            <StyledTableCell align="right">
             <Tooltip title={t("tooltips.delete")}>
-                <IconButton>
-                    <DeleteIcon fontSize='medium' onClick={() => actions.handleDeleteTask(task.id)}></DeleteIcon>
+                <IconButton onClick={() => actions.handleDeleteTask(task.id)}>
+                    <DeleteIcon fontSize='medium' />
                 </IconButton>
             </Tooltip>
             <Tooltip title={t("tooltips.complete")}>
-                <IconButton>
-                    <CheckCircleOutlineIcon fontSize='medium' onClick={handleChangeCompleted}></CheckCircleOutlineIcon>
+                <IconButton onClick={handleChangeCompleted}>
+                    <CheckCircleOutlineIcon fontSize='medium' />
                 </IconButton>
             </Tooltip>
+            </StyledTableCell>
         </StyledTableRow>
     );
 };

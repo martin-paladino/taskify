@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, FormControl, TextField, Input, Typography } from '@mui/material';
 
-const NewTask = ({onCreateTask, onCloseModal }) => {
+const NewTask = forwardRef(({onCreateTask, onCloseModal }, ref) => {
     const [formData, setFormData] = useState({
         title: "",
         endDate: "",
@@ -75,6 +75,6 @@ const NewTask = ({onCreateTask, onCloseModal }) => {
             </form>
         </Box>
     );
-};
+});
 
 export default NewTask;

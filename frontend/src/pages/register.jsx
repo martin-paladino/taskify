@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { registerUser  } from '../services/api';
+import { getUser } from '../utils';
 import {
     Avatar,
     Button,
@@ -11,7 +13,6 @@ import {
     FormControl,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { registerUser  } from '../services/api';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -23,6 +24,10 @@ const Register = () => {
 
     const navigate = useNavigate();
     const { t } = useTranslation();
+
+    useEffect(() => {
+        if(getUser()) navigate("/home");
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

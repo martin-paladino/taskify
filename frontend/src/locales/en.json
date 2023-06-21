@@ -3,6 +3,8 @@
     "task": "Task",
     "endDate": "End Date",
     "state": "State",
+    "welcome": "welcome, ",
+    "logout": "logout",
     "filters": {
         "all": "All",
         "completed": "Completed",

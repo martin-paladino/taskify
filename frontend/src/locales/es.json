@@ -3,6 +3,8 @@
     "task": "Tarea",
     "endDate": "Finalización",
     "state": "Estado",
+    "welcome": "Bienvenido/a, ",
+    "logout": "Cerrar sesión",
     "filters": {
         "all": "Todas",
         "completed": "Completadas",

@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { Button, Box, AppBar, Toolbar, Typography } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
+import { logoutUser } from "../services/api";
+import { getUser } from "../utils";
+import { Button, IconButton, Box, AppBar, Toolbar, Typography, Tooltip } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Navbar = ({ setSelectedFilter }) => {
     const [selected, setSelected] = useState("all");
 
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const handleButtonClick = (value) => {
         setSelected(value);
         setSelectedFilter(value);
+    };
+
+    const handleLogout = () => {
+        logoutUser();
+        localStorage.removeItem("user");
+        navigate("/login");
     };
 
     return (
@@ -53,6 +64,16 @@ const Navbar = ({ setSelectedFilter }) => {
                         {t("filters.pending")}
                     </Button>
                 </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Typography variant="body1" sx={{ mr: 1 }}>
+                        {t("welcome")}{getUser()?.username}
+                    </Typography>
+                    <Tooltip title={t("logout")}>
+                        <IconButton color="inherit" onClick={handleLogout}>
+                            <LogoutIcon />
+                        </IconButton>
+                    </Tooltip>
+                    </Box>
             </Toolbar>
         </AppBar>
     );

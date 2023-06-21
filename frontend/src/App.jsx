@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Route, Routes } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -9,18 +9,12 @@ import './App.css';
 
 function App() {
     const [selected, setSelected] = useState("en");
-    const [user, setUser] = useState(null);
     const { i18n } = useTranslation();
 
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
         setSelected(lng);
     };
-
-    useEffect(() => {
-        const user = localStorage.getItem("user");
-        if(user) setUser(JSON.parse(user));
-    }, []);
 
     return (
         <div>
@@ -35,10 +29,10 @@ function App() {
                 >ES</Button>
             </div>
             <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/" element={user ? <Home /> : <Register />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login setUser={setUser} />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </div>
     );

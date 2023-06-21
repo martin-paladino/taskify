@@ -1,34 +1,38 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { fetchTasks, deleteTask, createTask, updateTask } from "../services/api";
+import { getUser } from '../utils';
 import TaskList from "../components/TaskList";
 import Navbar from "../components/Navbar";
 import NewTask from "../components/NewTask";
-import { fetchTasks, deleteTask, createTask, updateTask } from "../services/api";
 import { Modal, IconButton, Tooltip } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const Home = () => {
     const [tasks, setTasks] = useState([]);
-    const [user, setUser] = useState(null);
     const [filteredTasks, setFilteredTasks] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("all");
     const [openedModal, setOpenedModal] = useState(false);
 
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     useEffect(() =>{
+        const currentUser = getUser();
+        if(!currentUser) {
+            navigate("/login");
+        }
+
         const getTasks = async () => {
             const tasks = await fetchTasks();
             setTasks(tasks);
             setFilteredTasks(tasks);
         };
-        const user = localStorage.getItem("user");
-        if(user) setUser(JSON.parse(user));
         getTasks();
     }, []);
 
     useEffect(() => {
-        console.log("hola")
         if(selectedFilter === "all") {
             setFilteredTasks(tasks);
         }
@@ -49,7 +53,6 @@ const Home = () => {
 
     const handleCreateTask = async (task) => {
         const newTask = await createTask(task);
-        console.log("nueva task added", newTask)
         setTasks([...tasks, newTask]);
     };
 

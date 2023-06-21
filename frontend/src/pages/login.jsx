@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { loginUser  } from '../services/api';
+import { getUser } from '../utils';
 import {
     Avatar,
     Button,
@@ -11,9 +13,8 @@ import {
     FormControl,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { loginUser  } from '../services/api';
 
-const Login = ({ setUser }) => {
+const Login = () => {
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -23,15 +24,18 @@ const Login = ({ setUser }) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
 
+    useEffect(() => {
+        if(getUser()) navigate("/home");
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await loginUser(formData);
-            if(res.message === "Invalid username or password") setError(t("loginForm.error"))
+            if(res.message === "Invalid username or password") setError(t("loginForm.error"));
             if(res.user) {
                 // stores user data in local storage to keep user logged in
                 localStorage.setItem("user", JSON.stringify(res.user));
-                setUser(res.user);
                 navigate("/home");
             };
         } catch (error) {

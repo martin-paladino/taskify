@@ -24,5 +24,26 @@
         "image": "Image",
         "submit": "Submit",
         "cancel": "Cancel"
+    },
+    "registerForm": {
+        "title": "Sign up",
+        "username": "Username",
+        "email": "Email",
+        "password": "password",
+        "submit": "Sign up",
+        "login": "Already have an account? Login"
+    },
+    "registerErrors": {
+        "invalidEmail": "Invalid email address",
+        "existingEmail": "Email address already registered",
+        "existingUsername": "Username already registered"
+    },
+    "loginForm": {
+        "title": "Login",
+        "username": "Username",
+        "password": "Password",
+        "submit": "Login",
+        "register": "Don't have an account? Sign up",
+        "error": "Invalid username or password"
     }
 }

@@ -61,10 +61,12 @@ export const registerUser = async (credentials) => {
     try {
         const res = await fetch(`${BASE_URL}/api/register/`, {
             method: 'POST',
-              body: credentials,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(credentials),
         });
         const data = await res.json();
-        console.log("data token", data)
         return data;
     } catch (error) {
         throw error;

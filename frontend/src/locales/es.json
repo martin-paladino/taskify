@@ -24,5 +24,26 @@
         "image": "Imagen",
         "submit": "Enviar",
         "cancel": "Cancelar"
+    },
+    "registerForm": {
+        "title": "Registro",
+        "username": "Nombre de usuario",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "submit": "Registrar",
+        "login": "¿Ya tienes cuenta? Inicia sesión"
+    },
+    "registerErrors": {
+        "invalidEmail": "Dirección de correo inválida",
+        "existingEmail": "Dirección de correo ya registrada",
+        "existingUsername": "Nombre de usuario ya registrado"
+    },
+    "loginForm": {
+        "title": "Iniciar sesión",
+        "username": "Nombre de usuario",
+        "password": "Contraseña",
+        "submit": "Iniciar sesión",
+        "register": "¿No tienes cuenta? Regístrate",
+        "error": "Usuario o contraseña incorrectos"
     }
 }
